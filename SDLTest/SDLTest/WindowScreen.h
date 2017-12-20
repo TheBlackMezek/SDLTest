@@ -4,28 +4,19 @@
 
 
 
-class WindowScreen
-{
-private:
-
-	SDL_Window* window;
-
-	SDL_Surface* screenSurface;
-
-	SDL_Surface* helloWorld;
 
 
-public:
-	WindowScreen(size_t width, size_t height);
-	~WindowScreen();
+extern const int SCREEN_WIDTH;
+extern const int SCREEN_HEIGHT;
 
-	const size_t SCREEN_WIDTH;
-	const size_t SCREEN_HEIGHT;
 
-	bool loadMedia();
+extern SDL_Window* window;
 
-	SDL_Surface* getHelloWorld();
-	SDL_Surface* getScreenSurface();
-	SDL_Window* getWindow();
-};
+extern SDL_Surface* screenSurface;
+
+extern SDL_Surface* helloWorld;
+
+void init();
+bool loadMedia();
+void close();
 

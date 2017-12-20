@@ -7,10 +7,6 @@
 #include "WindowScreen.h"
 
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-
-
 
 
 
@@ -21,21 +17,33 @@ const int SCREEN_HEIGHT = 480;
 int main(int argc, char* args[])
 {
 	
-	WindowScreen win(SCREEN_WIDTH, SCREEN_HEIGHT);
+	init();
 
-	if (!win.loadMedia())
+	if(!loadMedia())
 	{
 		printf("Failed to load media!\n");
 	}
 	else
 	{
-		SDL_LowerBlit(win.getHelloWorld(), nullptr, win.getScreenSurface(), nullptr);
-		SDL_UpdateWindowSurface(win.getWindow());
+		if (SDL_BlitSurface(helloWorld, NULL, screenSurface, NULL) != 0)
+		{
+			printf("Failed to blit! SDL_Error: %s\n", SDL_GetError());
+		}
+		if (SDL_UpdateWindowSurface(window) != 0)
+		{
+			printf("Failed to update window surface! SDL_Error: %s\n", SDL_GetError());
+		}
 	}
 
 	SDL_Delay(2000);
 
+	close();
+
 	return 0;
 }
+
+
+
+
 
 
